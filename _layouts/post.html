@@ -3,111 +3,120 @@ layout: default
 ---
 
 <!-- Article Header -->
-<header class="article-header">
+<section class="hero-section" style="padding: 20px 0;">
   <div class="container">
-    <div class="article-meta">
-      <span>📁 {{ page.category }}</span>
-      <span>📅 {{ page.date | date: "%Y-%m-%d" }}</span>
-      {% if page.tags %}
-      <span>🏷️ {{ page.tags | join: ", " }}</span>
-      {% endif %}
-    </div>
-    <h1 class="article-title">{{ page.title }}</h1>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb" style="background: transparent; padding: 0; margin: 0;">
+        <li class="breadcrumb-item"><a href="{{ site.baseurl }}/" style="color: var(--primary-color);">首页</a></li>
+        <li class="breadcrumb-item"><a href="{{ site.baseurl }}/category/{{ page.category | slugify }}" style="color: var(--primary-color);">{{ page.category }}</a></li>
+        <li class="breadcrumb-item active" style="color: var(--text-secondary);">{{ page.title }}</li>
+      </ol>
+    </nav>
   </div>
-</header>
+</section>
 
-<!-- Main Content -->
-<main class="site-content">
-  <div class="container">
-    <div class="content-wrapper">
-      
-      <!-- Article Content -->
-      <article class="article-content">
-        {{ content }}
+<!-- Article Content -->
+<main class="container mb-4">
+  <div class="row">
+    <div class="col-lg-9">
+      <article class="sidebar-widget" style="padding: 30px;">
+        
+        <h1 class="mb-3" style="font-size: 1.8rem; color: #fff;">{{ page.title }}</h1>
+        
+        <div class="mb-4" style="color: var(--text-secondary); font-size: 14px; display: flex; gap: 20px; flex-wrap: wrap;">
+          <span><i class="fas fa-folder"></i> {{ page.category }}</span>
+          <span><i class="fas fa-calendar"></i> {{ page.date | date: "%Y-%m-%d" }}</span>
+          {% if page.tags %}
+          <span><i class="fas fa-tags"></i> {{ page.tags | join: ", " }}</span>
+          {% endif %}
+        </div>
+        
+        <div class="article-content" style="color: var(--text-secondary); line-height: 1.8;">
+          {{ content }}
+        </div>
         
         <!-- Tags -->
         {% if page.tags %}
-        <div class="tags">
+        <div class="mt-4" style="display: flex; gap: 8px; flex-wrap: wrap;">
           {% for tag in page.tags %}
-          <a href="/tag/{{ tag | slugify }}" class="tag"># {{ tag }}</a>
+          <a href="{{ site.baseurl }}/tag/{{ tag | slugify }}" class="category-tag">{{ tag }}</a>
           {% endfor %}
         </div>
         {% endif %}
         
         <!-- Navigation -->
-        <nav class="article-nav" style="display: flex; justify-content: space-between; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color);">
+        <div class="mt-4 pt-3" style="border-top: 1px solid var(--border-color); display: flex; justify-content: space-between;">
           <div>
             {% if page.previous %}
-            <a href="{{ page.previous.url }}" class="btn btn-secondary">← {{ page.previous.title }}</a>
+            <a href="{{ site.baseurl }}{{ page.previous.url }}" class="btn btn-sm" style="background: var(--card-bg); color: #fff;">
+              ← {{ page.previous.title }}
+            </a>
             {% endif %}
           </div>
           <div>
             {% if page.next %}
-            <a href="{{ page.next.url }}" class="btn btn-secondary">{{ page.next.title }} →</a>
+            <a href="{{ site.baseurl }}{{ page.next.url }}" class="btn btn-sm" style="background: var(--primary-color); color: #fff;">
+              {{ page.next.title }} →
+            </a>
             {% endif %}
           </div>
-        </nav>
+        </div>
+        
       </article>
+    </div>
+    
+    <!-- Sidebar -->
+    <div class="col-lg-3">
       
-      <!-- Sidebar -->
-      <aside class="sidebar">
-        
-        <!-- Game Info -->
-        <div class="sidebar-widget">
-          <h3 class="sidebar-title">🎮 游戏信息</h3>
-          <ul style="font-size: 0.9rem;">
-            <li style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
-              <span class="text-muted">分类</span>
-              <span>{{ page.category }}</span>
-            </li>
-            {% if page.version %}
-            <li style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
-              <span class="text-muted">版本</span>
-              <span>{{ page.version }}</span>
-            </li>
-            {% endif %}
-            {% if page.size %}
-            <li style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
-              <span class="text-muted">容量</span>
-              <span>{{ page.size }}</span>
-            </li>
-            {% endif %}
-            {% if page.language %}
-            <li style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
-              <span class="text-muted">语言</span>
-              <span>{{ page.language }}</span>
-            </li>
-            {% endif %}
-          </ul>
-        </div>
-        
-        <!-- Download Section -->
-        <div class="sidebar-widget">
-          <h3 class="sidebar-title">📥 下载说明</h3>
-          <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
-            本页面仅提供游戏介绍和基本信息。游戏下载资源来自第三方，请支持正版游戏。
-          </p>
-        </div>
-        
-        <!-- Related Games -->
-        <div class="sidebar-widget">
-          <h3 class="sidebar-title">🎯 相关游戏</h3>
-          <ul id="related-games">
-            <li><a href="#">游戏1</a></li>
-            <li><a href="#">游戏2</a></li>
-            <li><a href="#">游戏3</a></li>
-          </ul>
-        </div>
-        
-      </aside>
+      <!-- Game Info -->
+      <div class="sidebar-widget">
+        <h3 class="sidebar-title"><i class="fas fa-info-circle"></i> 游戏信息</h3>
+        <ul style="font-size: 14px;">
+          <li style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border-color);">
+            <span style="color: var(--text-secondary);">分类</span>
+            <span style="color: var(--primary-color);">{{ page.category }}</span>
+          </li>
+          {% if page.version %}
+          <li style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border-color);">
+            <span style="color: var(--text-secondary);">版本</span>
+            <span>{{ page.version }}</span>
+          </li>
+          {% endif %}
+          {% if page.size %}
+          <li style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border-color);">
+            <span style="color: var(--text-secondary);">大小</span>
+            <span>{{ page.size }}</span>
+          </li>
+          {% endif %}
+          {% if page.language %}
+          <li style="display: flex; justify-content: space-between; padding: 8px 0;">
+            <span style="color: var(--text-secondary);">语言</span>
+            <span>{{ page.language }}</span>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+      
+      <!-- Download Notice -->
+      <div class="sidebar-widget">
+        <h3 class="sidebar-title"><i class="fas fa-download"></i> 下载说明</h3>
+        <p style="color: var(--text-secondary); font-size: 13px; line-height: 1.6;">
+          本页面仅提供游戏介绍。游戏下载资源来自互联网，请于24小时内删除，支持正版游戏。
+        </p>
+      </div>
+      
+      <!-- Related Games -->
+      <div class="sidebar-widget">
+        <h3 class="sidebar-title"><i class="fas fa-fire"></i> 相关游戏</h3>
+        <ul>
+          {% for post in site.posts limit:5 %}
+          {% if post.title != page.title %}
+          <li><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
       
     </div>
   </div>
 </main>
-
-<style>
-.article-nav {
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-</style>

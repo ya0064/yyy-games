@@ -1,125 +1,100 @@
 ---
 layout: default
-title: "丫丫游戏仓库 - 全球单机游戏资源中心"
+title: "丫丫游戏仓库 - 免费单机游戏下载基地"
 ---
 
-<!-- Hero Banner -->
-<section class="hero-banner">
+<!-- Hero Section -->
+<section class="hero-section">
   <div class="container">
-    <h1>🎮 丫丫游戏仓库</h1>
-    <p>全球单机游戏资源中心 | 最新单机游戏下载 | 游戏资讯 | 游戏攻略</p>
+    <div class="text-center">
+      <h1 class="hero-title">🎮 丫丫游戏仓库</h1>
+      <p class="hero-subtitle">全球单机游戏资源中心 | 3A大作 | 经典怀旧 | 高速下载</p>
+    </div>
   </div>
 </section>
 
-<!-- Category Navigation -->
-<nav class="category-nav container">
-  <a href="{{ site.baseurl }}/" class="active">全部游戏</a>
-  <a href="{{ site.baseurl }}/category/dzmx">动作冒险</a>
-  <a href="{{ site.baseurl }}/category/jsby">角色扮演</a>
-  <a href="{{ site.baseurl }}/category/mnjy">模拟经营</a>
-  <a href="{{ site.baseurl }}/category/scjs">赛车竞速</a>
-  <a href="{{ site.baseurl }}/category/clyx">策略游戏</a>
-  <a href="{{ site.baseurl }}/category/yyyx">音乐游戏</a>
-  <a href="{{ site.baseurl }}/category/typt">体育竞技</a>
-</nav>
-
 <!-- Main Content -->
-<main class="site-content">
-  <div class="container">
-    <div class="content-wrapper">
+<main class="container mb-4">
+  <div class="row">
+    
+    <!-- Game List (Main Content) -->
+    <div class="col-lg-9">
       
-      <!-- Game List -->
-      <div class="main-content">
+      <!-- Latest Games -->
+      <section class="mb-4">
+        <div class="section-title">
+          <h2><i class="fas fa-gamepad"></i> 最新游戏</h2>
+          <a href="{{ site.baseurl }}/games" class="view-all">查看更多 →</a>
+        </div>
         
-        <!-- Latest Games -->
-        <section class="section-title">
-          <h2>最新游戏</h2>
-          <a href="{{ site.baseurl }}/games" class="view-all">查看全部 →</a>
-        </section>
-        
-        <!-- Game Grid - Using Jekyll posts -->
-        <div class="game-grid">
+        <div class="row">
           {% for post in site.posts limit:12 %}
-          <article class="game-card">
-            <a href="{{ site.baseurl }}{{ post.url }}" class="game-card-image">
-              <img src="https://via.placeholder.com/400x225/16213e/ff6b35?text={{ post.title | truncate: 20 }}" alt="{{ post.title }}" loading="lazy">
-              <span class="game-card-badge">NEW</span>
-            </a>
-            <div class="game-card-content">
-              <h3 class="game-card-title">
-                <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
-              </h3>
-              <div class="game-card-meta">
-                <span>📁 {{ post.category }}</span>
-                <span>📅 {{ post.date | date: "%Y-%m-%d" }}</span>
+          <div class="col-lg-3 col-md-4 col-6">
+            <article class="game-card">
+              <a href="{{ site.baseurl }}{{ post.url }}" class="game-card-image">
+                <img src="https://cdn.mdisk.cn/images/2025/img/game-placeholder.jpg" alt="{{ post.title }}" loading="lazy">
+                <span class="game-card-badge">NEW</span>
+              </a>
+              <div class="game-card-body">
+                <h3 class="game-card-title">
+                  <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a>
+                </h3>
+                <div class="game-card-meta">
+                  <span><i class="fas fa-folder"></i> {{ post.category }}</span>
+                </div>
               </div>
-              <div class="game-card-tags">
-                {% if post.tags %}
-                  {% for tag in post.tags limit:2 %}
-                  <span class="game-card-tag">{{ tag }}</span>
-                  {% endfor %}
-                {% else %}
-                  <span class="game-card-tag">单机</span>
-                  <span class="game-card-tag">中文</span>
-                {% endif %}
-              </div>
-            </div>
-          </article>
+            </article>
+          </div>
           {% endfor %}
         </div>
-        
-        <!-- Pagination -->
-        <nav class="pagination">
-          <a href="#" class="prev disabled">上一页</a>
-          <span class="current">1</span>
-          <a href="#">2</a>
-          <a href="#">3</a>
-          <a href="#" class="next">下一页 →</a>
-        </nav>
-        
+      </section>
+      
+      <!-- Pagination -->
+      <nav class="pagination">
+        <a href="#" class="disabled">上一页</a>
+        <span class="current">1</span>
+        <a href="#">2</a>
+        <a href="#">3</a>
+        <a href="#">下一页 →</a>
+      </nav>
+      
+    </div>
+    
+    <!-- Sidebar -->
+    <div class="col-lg-3">
+      
+      <!-- Hot Categories -->
+      <div class="sidebar-widget">
+        <h3 class="sidebar-title"><i class="fas fa-fire"></i> 热门分类</h3>
+        <ul>
+          <li><a href="{{ site.baseurl }}/category/dzmx">动作冒险 <span class="count">328</span></a></li>
+          <li><a href="{{ site.baseurl }}/category/jsby">角色扮演 <span class="count">256</span></a></li>
+          <li><a href="{{ site.baseurl }}/category/mnjy">模拟经营 <span class="count">189</span></a></li>
+          <li><a href="{{ site.baseurl }}/category/clyx">策略游戏 <span class="count">145</span></a></li>
+          <li><a href="{{ site.baseurl }}/category/scjs">赛车竞速 <span class="count">132</span></a></li>
+          <li><a href="{{ site.baseurl }}/category/sjyx">射击游戏 <span class="count">98</span></a></li>
+          <li><a href="{{ site.baseurl }}/category/tyjj">体育竞技 <span class="count">87</span></a></li>
+        </ul>
       </div>
       
-      <!-- Sidebar -->
-      <aside class="sidebar">
-        
-        <!-- About Widget -->
-        <div class="sidebar-widget">
-          <h3 class="sidebar-title">📖 关于我们</h3>
-          <p class="text-muted" style="font-size: 0.9rem;">
-            丫丫游戏仓库是全球单机游戏资源中心，提供最新单机游戏下载资源，涵盖动作冒险、角色扮演、模拟经营等多种类型游戏。
-          </p>
-        </div>
-        
-        <!-- Hot Categories -->
-        <div class="sidebar-widget">
-          <h3 class="sidebar-title">🔥 热门分类</h3>
-          <ul>
-            <li><a href="{{ site.baseurl }}/category/dzmx">动作冒险 <span class="count">328</span></a></li>
-            <li><a href="{{ site.baseurl }}/category/jsby">角色扮演 <span class="count">256</span></a></li>
-            <li><a href="{{ site.baseurl }}/category/mnjy">模拟经营 <span class="count">189</span></a></li>
-            <li><a href="{{ site.baseurl }}/category/scjs">赛车竞速 <span class="count">145</span></a></li>
-            <li><a href="{{ site.baseurl }}/category/clyx">策略游戏 <span class="count">132</span></a></li>
-          </ul>
-        </div>
-        
-        <!-- Latest Updates -->
-        <div class="sidebar-widget">
-          <h3 class="sidebar-title">🕐 最新更新</h3>
-          <ul>
-            {% for post in site.posts limit:5 %}
-            <li><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
-            {% endfor %}
-          </ul>
-        </div>
-        
-      </aside>
+      <!-- Latest Updates -->
+      <div class="sidebar-widget">
+        <h3 class="sidebar-title"><i class="fas fa-clock"></i> 最新更新</h3>
+        <ul>
+          {% for post in site.posts limit:8 %}
+          <li><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+      
+      <!-- About -->
+      <div class="sidebar-widget">
+        <h3 class="sidebar-title"><i class="fas fa-info-circle"></i> 关于我们</h3>
+        <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.6;">
+          丫丫游戏仓库是专业的单机游戏下载网站，提供3A大作、经典怀旧单机、独立游戏、汉化免安装版资源，全站无广告，高速下载。
+        </p>
+      </div>
       
     </div>
   </div>
 </main>
-
-<style>
-.loading-indicator {
-  display: none;
-}
-</style>

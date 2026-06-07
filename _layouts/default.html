@@ -3,74 +3,434 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  
   <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
-  
   <meta name="description" content="{{ page.description | default: site.description }}">
-  <meta name="author" content="{{ site.author }}">
-  <meta name="robots" content="index, follow">
-  
-  <!-- Open Graph -->
-  <meta property="og:title" content="{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}">
-  <meta property="og:description" content="{{ page.description | default: site.description }}">
-  <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
-  <meta property="og:url" content="{{ page.url | absolute_url }}">
-  <meta property="og:site_name" content="{{ site.title }}">
-  
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
-  <meta name="twitter:description" content="{{ page.description | default: site.description }}">
+  <meta name="keywords" content="单机游戏下载,3A大作,经典怀旧单机,免安装单机游戏">
   
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="icon" href="https://cdn.mdisk.cn/images/2025/img/1-250Z210243bA.ico" type="image/x-icon">
   
-  <!-- CSS -->
-  <link rel="stylesheet" href="/assets/css/style.css">
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.mdisk.cn/static/css/bootstrap-5.1.3-dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdn.mdisk.cn/static/css/fontawesome-free-6.4.0-web/css/all.min.css" rel="stylesheet">
+  <!-- Swiper CSS -->
+  <link href="https://cdn.mdisk.cn/static/css/swiper/swiper-bundle.min.css" rel="stylesheet">
   
-  <!-- Canonical URL -->
-  <link rel="canonical" href="{{ page.url | absolute_url }}">
-  
-  <!-- JS -->
-  <script src="/assets/js/main.js" defer></script>
+  <style>
+    /* ===== CSS Variables ===== */
+    :root {
+      --primary-color: #ff6b00;
+      --primary-hover: #ff8533;
+      --dark-bg: #1a1a1a;
+      --card-bg: #252525;
+      --border-color: #333333;
+      --text-primary: #ffffff;
+      --text-secondary: #b0b0b0;
+    }
+    
+    /* ===== Base Styles ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      background-color: var(--dark-bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+    
+    a { color: var(--text-primary); text-decoration: none; transition: 0.3s; }
+    a:hover { color: var(--primary-color); }
+    
+    /* ===== Top Header ===== */
+    .top-header {
+      background: #111111;
+      border-bottom: 2px solid var(--primary-color);
+      padding: 10px 0;
+    }
+    
+    .logo img {
+      height: 50px;
+      width: auto;
+    }
+    
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      gap: 5px;
+    }
+    
+    .nav-menu > li {
+      position: relative;
+    }
+    
+    .nav-menu > li > a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 15px;
+      color: #fff;
+      font-size: 15px;
+      border-radius: 4px;
+    }
+    
+    .nav-menu > li > a:hover,
+    .nav-menu > li > a.active {
+      background: var(--primary-color);
+      color: #fff;
+    }
+    
+    /* Dropdown Menu */
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      min-width: 180px;
+      z-index: 1000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+    
+    .dropdown-menu li a {
+      display: block;
+      padding: 10px 15px;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+    
+    .dropdown-menu li a:hover {
+      background: var(--primary-color);
+      color: #fff;
+    }
+    
+    /* ===== Search Box ===== */
+    .search-box {
+      display: flex;
+      align-items: center;
+      background: var(--card-bg);
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+    
+    .search-box input {
+      background: transparent;
+      border: none;
+      padding: 8px 12px;
+      color: #fff;
+      width: 200px;
+      font-size: 14px;
+    }
+    
+    .search-box input:focus { outline: none; }
+    
+    .search-box button {
+      background: var(--primary-color);
+      border: none;
+      padding: 8px 15px;
+      color: #fff;
+      cursor: pointer;
+    }
+    
+    /* ===== Hero Section ===== */
+    .hero-section {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      padding: 30px 0;
+      margin-bottom: 30px;
+    }
+    
+    .hero-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary-color), #ff8533);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+    }
+    
+    .hero-subtitle {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+    
+    /* ===== Game Card ===== */
+    .game-card {
+      background: var(--card-bg);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: 1px solid var(--border-color);
+      margin-bottom: 20px;
+    }
+    
+    .game-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(255, 107, 0, 0.2);
+      border-color: var(--primary-color);
+    }
+    
+    .game-card-image {
+      position: relative;
+      width: 100%;
+      padding-top: 60%;
+      overflow: hidden;
+    }
+    
+    .game-card-image img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+    
+    .game-card:hover .game-card-image img {
+      transform: scale(1.05);
+    }
+    
+    .game-card-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: var(--primary-color);
+      color: #fff;
+      padding: 3px 10px;
+      border-radius: 3px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    
+    .game-card-body {
+      padding: 15px;
+    }
+    
+    .game-card-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    
+    .game-card-meta {
+      display: flex;
+      justify-content: space-between;
+      color: var(--text-secondary);
+      font-size: 12px;
+    }
+    
+    /* ===== Category Section ===== */
+    .section-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--primary-color);
+    }
+    
+    .section-title h2 {
+      font-size: 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .section-title h2 i {
+      color: var(--primary-color);
+    }
+    
+    .view-all {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+    
+    .view-all:hover {
+      color: var(--primary-color);
+    }
+    
+    /* ===== Sidebar ===== */
+    .sidebar-widget {
+      background: var(--card-bg);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 1px solid var(--border-color);
+    }
+    
+    .sidebar-title {
+      font-size: 1rem;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--primary-color);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .sidebar-title i {
+      color: var(--primary-color);
+    }
+    
+    .sidebar-widget ul {
+      list-style: none;
+    }
+    
+    .sidebar-widget ul li {
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .sidebar-widget ul li:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+    
+    .sidebar-widget ul li a {
+      color: var(--text-secondary);
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .sidebar-widget ul li a:hover {
+      color: var(--primary-color);
+    }
+    
+    .sidebar-widget .count {
+      background: var(--dark-bg);
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 12px;
+    }
+    
+    /* ===== Footer ===== */
+    .site-footer {
+      background: #111111;
+      border-top: 1px solid var(--border-color);
+      padding: 30px 0;
+      margin-top: 50px;
+    }
+    
+    .footer-content {
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+    
+    .footer-content a {
+      color: var(--primary-color);
+    }
+    
+    /* ===== Pagination ===== */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin: 30px 0;
+    }
+    
+    .pagination a,
+    .pagination span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 40px;
+      height: 40px;
+      padding: 0 12px;
+      background: var(--card-bg);
+      color: var(--text-secondary);
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+    }
+    
+    .pagination a:hover,
+    .pagination .current {
+      background: var(--primary-color);
+      color: #fff;
+      border-color: var(--primary-color);
+    }
+    
+    /* ===== Responsive ===== */
+    @media (max-width: 768px) {
+      .nav-menu { display: none; }
+      .hero-title { font-size: 1.8rem; }
+      .search-box input { width: 150px; }
+    }
+    
+    /* ===== Category Tags ===== */
+    .category-tag {
+      display: inline-block;
+      background: rgba(255,107,0,0.15);
+      color: var(--primary-color);
+      padding: 3px 10px;
+      border-radius: 3px;
+      font-size: 12px;
+    }
+    
+    /* ===== Container Custom ===== */
+    .container { max-width: 1200px; }
+  </style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="site-header">
+  
+  <!-- Top Header -->
+  <header class="top-header">
     <div class="container">
-      <div class="header-inner">
-        
+      <div class="row align-items-center">
         <!-- Logo -->
-        <div class="site-logo">
-          <span class="logo-icon">🎮</span>
-          <div>
-            <a href="{{ site.baseurl }}/">{{ site.title }}</a>
-            <span class="logo-sub">{{ site.subtitle }}</span>
-          </div>
+        <div class="col-lg-2 col-md-3 col-6">
+          <a href="{{ site.baseurl }}/" class="logo">
+            <span style="font-size: 1.5rem; font-weight: bold; color: var(--primary-color);">🎮 {{ site.title }}</span>
+          </a>
         </div>
-        
-        <!-- Mobile Menu Toggle -->
-        <button class="menu-toggle" onclick="toggleMenu()" aria-label="菜单">☰</button>
         
         <!-- Navigation -->
-        <nav class="main-nav" id="main-nav">
-          <ul>
-            <li><a href="{{ site.baseurl }}/" class="{% if page.url == '/' %}active{% endif %}">首页</a></li>
-            <li><a href="{{ site.baseurl }}/games">全部游戏</a></li>
-            <li><a href="{{ site.baseurl }}/category/dzmx">动作冒险</a></li>
-            <li><a href="{{ site.baseurl }}/category/jsby">角色扮演</a></li>
-            <li><a href="{{ site.baseurl }}/category/mnjy">模拟经营</a></li>
-            <li><a href="{{ site.baseurl }}/about">关于我们</a></li>
+        <div class="col-lg-8 d-none d-md-block">
+          <ul class="nav-menu">
+            <li><a href="{{ site.baseurl }}/" class="active"><i class="fas fa-home"></i> 首页</a></li>
+            <li class="dropdown">
+              <a href="{{ site.baseurl }}/games"><i class="fa-solid fa-bars"></i> 全部游戏 <i class="fas fa-chevron-down"></i></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{ site.baseurl }}/category/dzmx">动作冒险</a></li>
+                <li><a href="{{ site.baseurl }}/category/jsby">角色扮演</a></li>
+                <li><a href="{{ site.baseurl }}/category/dzyx">动作游戏</a></li>
+                <li><a href="{{ site.baseurl }}/category/mnjy">模拟经营</a></li>
+                <li><a href="{{ site.baseurl }}/category/clyx">策略游戏</a></li>
+                <li><a href="{{ site.baseurl }}/category/xxyz">休闲益智</a></li>
+                <li><a href="{{ site.baseurl }}/category/sjyx">射击游戏</a></li>
+                <li><a href="{{ site.baseurl }}/category/scjs">赛车竞速</a></li>
+                <li><a href="{{ site.baseurl }}/category/tyjj">体育竞技</a></li>
+              </ul>
+            </li>
+            <li><a href="{{ site.baseurl }}/hot"><i class="fa-solid fa-fire"></i> 热门游戏</a></li>
+            <li><a href="{{ site.baseurl }}/update"><i class="fas fa-calendar-check"></i> 更新记录</a></li>
+            <li><a href="{{ site.baseurl }}/about"><i class="fas fa-circle-question"></i> 帮助中心</a></li>
           </ul>
-        </nav>
-        
-        <!-- Search Box -->
-        <div class="search-box">
-          <input type="text" placeholder="搜索游戏..." aria-label="搜索">
-          <button type="submit">🔍</button>
         </div>
         
+        <!-- Search -->
+        <div class="col-lg-2 col-md-4 col-6">
+          <div class="search-box">
+            <input type="text" placeholder="搜索游戏...">
+            <button type="submit"><i class="fas fa-search"></i></button>
+          </div>
+        </div>
       </div>
     </div>
   </header>
@@ -81,72 +441,17 @@
   <!-- Footer -->
   <footer class="site-footer">
     <div class="container">
-      <div class="footer-inner">
-        
-        <!-- About -->
-        <div class="footer-widget">
-          <h4>关于玩丫游戏</h4>
-          <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
-            玩丫游戏是全球单机游戏交流中心，致力于为玩家提供最新、最全的单机游戏资源。
-          </p>
-        </div>
-        
-        <!-- Quick Links -->
-        <div class="footer-widget">
-          <h4>快速链接</h4>
-          <ul>
-            <li><a href="{{ site.baseurl }}/">首页</a></li>
-            <li><a href="{{ site.baseurl }}/games">全部游戏</a></li>
-            <li><a href="{{ site.baseurl }}/about">关于我们</a></li>
-          </ul>
-        </div>
-        
-        <!-- Categories -->
-        <div class="footer-widget">
-          <h4>游戏分类</h4>
-          <ul>
-            <li><a href="{{ site.baseurl }}/category/dzmx">动作冒险</a></li>
-            <li><a href="{{ site.baseurl }}/category/jsby">角色扮演</a></li>
-            <li><a href="{{ site.baseurl }}/category/mnjy">模拟经营</a></li>
-          </ul>
-        </div>
-        
-        <!-- Contact -->
-        <div class="footer-widget">
-          <h4>联系我们</h4>
-          <ul>
-            <li><a href="mailto:{{ site.author_email }}">{{ site.author_email }}</a></li>
-          </ul>
-        </div>
-        
-      </div>
-      
-      <div class="footer-bottom">
-        <p>
-          © {{ 'now' | date: "%Y" }} <a href="{{ site.baseurl }}/">{{ site.title }}</a> | 
-          基于 <a href="https://jekyllrb.com" target="_blank">Jekyll</a> 构建 | 
-          部署于 <a href="https://pages.github.com" target="_blank">GitHub Pages</a>
-        </p>
-        <p style="margin-top: 0.5rem;">
-          <a href="{{ site.url }}">{{ site.url }}</a>
+      <div class="footer-content">
+        <p>Copyright © 2026 <a href="{{ site.baseurl }}/">{{ site.title }}</a> All rights reserved.</p>
+        <p style="margin-top: 10px; font-size: 12px; color: #666;">
+          本站资源来自互联网，仅供学习交流使用，下载24小时内删除，请勿商业用途。
         </p>
       </div>
     </div>
   </footer>
   
-  <script>
-    // Mobile menu toggle
-    function toggleMenu() {
-      const nav = document.getElementById('main-nav');
-      nav.classList.toggle('active');
-    }
-    
-    // Close mobile menu on resize
-    window.addEventListener('resize', function() {
-      if (window.innerWidth > 768) {
-        document.getElementById('main-nav').classList.remove('active');
-      }
-    });
-  </script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.mdisk.cn/static/css/bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js"></script>
+  
 </body>
 </html>
