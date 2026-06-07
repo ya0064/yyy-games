@@ -9,29 +9,31 @@ baseurl: ""
 author: "GameHub"
 author_email: "contact@bububuga.cc.cd"
 
-# Build settings
+# Build settings - Simplified for GitHub Pages compatibility
 markdown: kramdown
-theme: minima
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
+
+# Pagination
+paginate: 20
+paginate_path: "/page/:num/"
 
 # Exclude from processing
 exclude:
   - Gemfile
   - Gemfile.lock
   - node_modules
-  - vendor/bundle/
-  - vendor/cache/
-  - vendor/gems/
-  - vendor/ruby/
+  - vendor/
+  - "*.md"
+  - readme.md
 
 # Collections
 collections:
   posts:
     output: true
-    permalink: /:title/
+    permalink: /:year/:month/:day/:title/
 
 # Defaults
 defaults:
