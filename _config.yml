@@ -1,0 +1,52 @@
+# Site settings
+title: "丫丫游戏仓库"
+subtitle: "全球单机游戏资源中心"
+description: "全球单机游戏交流中心，提供最新单机游戏下载、游戏资讯、游戏攻略"
+url: "https://bububuga.cc.cd"
+baseurl: ""
+
+# Author info
+author: "GameHub"
+author_email: "contact@bububuga.cc.cd"
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+
+# Collections
+collections:
+  posts:
+    output: true
+    permalink: /:title/
+
+# Defaults
+defaults:
+  - scope:
+      path: "_posts"
+    values:
+      layout: post
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+# Header and Footer
+header_pages:
+  - about.md
+
+# SEO
+lang: zh-CN

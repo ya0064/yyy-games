@@ -1,0 +1,113 @@
+---
+layout: default
+---
+
+<!-- Article Header -->
+<header class="article-header">
+  <div class="container">
+    <div class="article-meta">
+      <span>📁 {{ page.category }}</span>
+      <span>📅 {{ page.date | date: "%Y-%m-%d" }}</span>
+      {% if page.tags %}
+      <span>🏷️ {{ page.tags | join: ", " }}</span>
+      {% endif %}
+    </div>
+    <h1 class="article-title">{{ page.title }}</h1>
+  </div>
+</header>
+
+<!-- Main Content -->
+<main class="site-content">
+  <div class="container">
+    <div class="content-wrapper">
+      
+      <!-- Article Content -->
+      <article class="article-content">
+        {{ content }}
+        
+        <!-- Tags -->
+        {% if page.tags %}
+        <div class="tags">
+          {% for tag in page.tags %}
+          <a href="/tag/{{ tag | slugify }}" class="tag"># {{ tag }}</a>
+          {% endfor %}
+        </div>
+        {% endif %}
+        
+        <!-- Navigation -->
+        <nav class="article-nav" style="display: flex; justify-content: space-between; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color);">
+          <div>
+            {% if page.previous %}
+            <a href="{{ page.previous.url }}" class="btn btn-secondary">← {{ page.previous.title }}</a>
+            {% endif %}
+          </div>
+          <div>
+            {% if page.next %}
+            <a href="{{ page.next.url }}" class="btn btn-secondary">{{ page.next.title }} →</a>
+            {% endif %}
+          </div>
+        </nav>
+      </article>
+      
+      <!-- Sidebar -->
+      <aside class="sidebar">
+        
+        <!-- Game Info -->
+        <div class="sidebar-widget">
+          <h3 class="sidebar-title">🎮 游戏信息</h3>
+          <ul style="font-size: 0.9rem;">
+            <li style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+              <span class="text-muted">分类</span>
+              <span>{{ page.category }}</span>
+            </li>
+            {% if page.version %}
+            <li style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+              <span class="text-muted">版本</span>
+              <span>{{ page.version }}</span>
+            </li>
+            {% endif %}
+            {% if page.size %}
+            <li style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+              <span class="text-muted">容量</span>
+              <span>{{ page.size }}</span>
+            </li>
+            {% endif %}
+            {% if page.language %}
+            <li style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+              <span class="text-muted">语言</span>
+              <span>{{ page.language }}</span>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+        
+        <!-- Download Section -->
+        <div class="sidebar-widget">
+          <h3 class="sidebar-title">📥 下载说明</h3>
+          <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6;">
+            本页面仅提供游戏介绍和基本信息。游戏下载资源来自第三方，请支持正版游戏。
+          </p>
+        </div>
+        
+        <!-- Related Games -->
+        <div class="sidebar-widget">
+          <h3 class="sidebar-title">🎯 相关游戏</h3>
+          <ul id="related-games">
+            <li><a href="#">游戏1</a></li>
+            <li><a href="#">游戏2</a></li>
+            <li><a href="#">游戏3</a></li>
+          </ul>
+        </div>
+        
+      </aside>
+      
+    </div>
+  </div>
+</main>
+
+<style>
+.article-nav {
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+</style>

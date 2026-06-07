@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <meta name="author" content="{{ site.author }}">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}">
+  <meta property="og:description" content="{{ page.description | default: site.description }}">
+  <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:site_name" content="{{ site.title }}">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+  <meta name="twitter:description" content="{{ page.description | default: site.description }}">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/css/style.css">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  
+  <!-- JS -->
+  <script src="/assets/js/main.js" defer></script>
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-inner">
+        
+        <!-- Logo -->
+        <div class="site-logo">
+          <span class="logo-icon">🎮</span>
+          <div>
+            <a href="{{ site.baseurl }}/">{{ site.title }}</a>
+            <span class="logo-sub">{{ site.subtitle }}</span>
+          </div>
+        </div>
+        
+        <!-- Mobile Menu Toggle -->
+        <button class="menu-toggle" onclick="toggleMenu()" aria-label="菜单">☰</button>
+        
+        <!-- Navigation -->
+        <nav class="main-nav" id="main-nav">
+          <ul>
+            <li><a href="{{ site.baseurl }}/" class="{% if page.url == '/' %}active{% endif %}">首页</a></li>
+            <li><a href="{{ site.baseurl }}/games">全部游戏</a></li>
+            <li><a href="{{ site.baseurl }}/category/dzmx">动作冒险</a></li>
+            <li><a href="{{ site.baseurl }}/category/jsby">角色扮演</a></li>
+            <li><a href="{{ site.baseurl }}/category/mnjy">模拟经营</a></li>
+            <li><a href="{{ site.baseurl }}/about">关于我们</a></li>
+          </ul>
+        </nav>
+        
+        <!-- Search Box -->
+        <div class="search-box">
+          <input type="text" placeholder="搜索游戏..." aria-label="搜索">
+          <button type="submit">🔍</button>
+        </div>
+        
+      </div>
+    </div>
+  </header>
+  
+  <!-- Main Content -->
+  {{ content }}
+  
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        
+        <!-- About -->
+        <div class="footer-widget">
+          <h4>关于玩丫游戏</h4>
+          <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+            玩丫游戏是全球单机游戏交流中心，致力于为玩家提供最新、最全的单机游戏资源。
+          </p>
+        </div>
+        
+        <!-- Quick Links -->
+        <div class="footer-widget">
+          <h4>快速链接</h4>
+          <ul>
+            <li><a href="{{ site.baseurl }}/">首页</a></li>
+            <li><a href="{{ site.baseurl }}/games">全部游戏</a></li>
+            <li><a href="{{ site.baseurl }}/about">关于我们</a></li>
+          </ul>
+        </div>
+        
+        <!-- Categories -->
+        <div class="footer-widget">
+          <h4>游戏分类</h4>
+          <ul>
+            <li><a href="{{ site.baseurl }}/category/dzmx">动作冒险</a></li>
+            <li><a href="{{ site.baseurl }}/category/jsby">角色扮演</a></li>
+            <li><a href="{{ site.baseurl }}/category/mnjy">模拟经营</a></li>
+          </ul>
+        </div>
+        
+        <!-- Contact -->
+        <div class="footer-widget">
+          <h4>联系我们</h4>
+          <ul>
+            <li><a href="mailto:{{ site.author_email }}">{{ site.author_email }}</a></li>
+          </ul>
+        </div>
+        
+      </div>
+      
+      <div class="footer-bottom">
+        <p>
+          © {{ 'now' | date: "%Y" }} <a href="{{ site.baseurl }}/">{{ site.title }}</a> | 
+          基于 <a href="https://jekyllrb.com" target="_blank">Jekyll</a> 构建 | 
+          部署于 <a href="https://pages.github.com" target="_blank">GitHub Pages</a>
+        </p>
+        <p style="margin-top: 0.5rem;">
+          <a href="{{ site.url }}">{{ site.url }}</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+  
+  <script>
+    // Mobile menu toggle
+    function toggleMenu() {
+      const nav = document.getElementById('main-nav');
+      nav.classList.toggle('active');
+    }
+    
+    // Close mobile menu on resize
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 768) {
+        document.getElementById('main-nav').classList.remove('active');
+      }
+    });
+  </script>
+</body>
+</html>

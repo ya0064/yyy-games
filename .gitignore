@@ -1,0 +1,41 @@
+# Ruby
+/.bundle/
+/vendor/bundle/
+/vendor/cache/
+/vendor/gems/
+/vendor/ruby/
+
+# Jekyll
+/_site/
+/.jekyll-cache/
+/.jekyll-metadata
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Node (if using npm/node)
+/node_modules/
+/npm-debug.log*
+/yarn-error.log
+
+# Environment
+.env
+.env.local
+.env.*.local
